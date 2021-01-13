@@ -10,7 +10,6 @@ import NewAutomatePage from "./new-automate-page";
 import NewCampaignPage from "./new-campaign-page";
 import ProfilePage from "./profile-page";
 import RetargetsPage from "./retargets-page";
-import VkAccountPage from "./vk-account-page";
 
 
 const Pages = () => {
@@ -31,7 +30,6 @@ const Pages = () => {
             <Route path='/new_campaign' component={NewCampaignPage} />
             <Route path='/user_profile' component={ProfilePage} />
             <Route path='/retarget' component={RetargetsPage} />
-            <Route path='/vk_account' component={VkAccountPage} />
 
             <Redirect to='/' />
 

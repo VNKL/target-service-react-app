@@ -55,10 +55,6 @@ export default function UserMenu() {
                     <MenuItem>Профиль</MenuItem>
                 </Link>
 
-                <Link component={RouterLink} to='/vk_account' color='textPrimary' underline='none'>
-                    <MenuItem>ВК аккаунт</MenuItem>
-                </Link>
-
                 <MenuItem onClick={logOut}>Выйти</MenuItem>
 
             </Menu>
