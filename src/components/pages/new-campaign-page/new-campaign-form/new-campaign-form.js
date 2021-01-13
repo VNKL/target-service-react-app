@@ -58,6 +58,8 @@ class NewCampaignForm extends React.Component {
     }
     api = new ApiService()
 
+    startCampaign = this.props.startCampaign
+
     handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value
@@ -199,16 +201,14 @@ class NewCampaignForm extends React.Component {
         if (!group) {groupError = true}
 
         this.setState({releaseUrlError: urlError, budgetError, cabinetError, clientError, groupError},
-            this.startCampaign)
+            this.checkStartCampaign)
 
     }
 
-    startCampaign = () => {
+    checkStartCampaign = () => {
         const {releaseUrlError, budgetError, cabinetError, clientError, groupError} = this.state
         if (!releaseUrlError && !budgetError && !cabinetError && !clientError && !groupError) {
-            console.log(this.state)
-        } else {
-            console.log('form error')
+            this.startCampaign(this.state)
         }
     }
 

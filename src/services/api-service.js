@@ -16,6 +16,10 @@ export default class ApiService {
         }
     }
 
+    async createCampaign(campaignSettings) {
+        console.log(campaignSettings)
+    }
+
     async getUser() {
         return await this.getResponse('user.get')
     }
