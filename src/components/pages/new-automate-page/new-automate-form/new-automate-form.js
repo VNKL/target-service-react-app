@@ -53,7 +53,7 @@ const NewAutomateForm = (props) => {
 
     const startAutomate = (campaignError, targetCostError) => {
         if (!campaignError && !targetCostError) {
-            console.log(state)
+            props.startAutomate(state)
         } else {
             console.log('form error')
         }

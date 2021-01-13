@@ -16,6 +16,10 @@ export default class ApiService {
         }
     }
 
+    async automateCampaign(automateSettings) {
+        console.log(automateSettings)
+    }
+
     async createCampaign(campaignSettings) {
         console.log(campaignSettings)
     }
