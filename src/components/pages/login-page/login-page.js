@@ -51,30 +51,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const tryToLogin = async (changeLoggedInStatus, setLoginError, setLoginValueError, setPasswordValueError) => {
-    const api = new ApiService()
-    const username = document.getElementById('username').value
-    const password = document.getElementById('password').value
-
-    if (username === '') {setLoginValueError(true)} else {setLoginValueError(false)}
-    if (password === '') {setPasswordValueError(true)} else {setPasswordValueError(false)}
-
-    if (username && password) {
-        const resp = await api.login(username, password)
-        if (typeof resp !== 'undefined') {
-            changeLoggedInStatus(true)
-            localStorage.setItem('token', resp.token)
-            window.location.href ='/'
-        } else {
-            document.getElementById('form').reset()
-            setLoginValueError(false)
-            setPasswordValueError(false)
-            setLoginError(true)
-        }
-    }
-}
-
-
 const LoginPage = (props) => {
     const classes = useStyles();
     const {changeLoggedInStatus} = props
@@ -88,9 +64,36 @@ const LoginPage = (props) => {
     const onEnterPress = (event) => {
         if(event.keyCode === 13 && event.shiftKey === false) {
             event.preventDefault();
-            tryToLogin(changeLoggedInStatus, setLoginError, setLoginValueError, setPasswordValueError);
+            tryToLogin();
         }
     }
+
+    const checkLoginResponse = (resp) => {
+        if (typeof resp !== 'undefined') {
+            changeLoggedInStatus(true)
+            localStorage.setItem('token', resp.token)
+            window.location.href ='/'
+        } else {
+            document.getElementById('form').reset()
+            setLoginValueError(false)
+            setPasswordValueError(false)
+            setLoginError(true)
+        }
+    }
+
+    const tryToLogin = () => {
+        const username = document.getElementById('username').value
+        const password = document.getElementById('password').value
+
+        if (username === '') {setLoginValueError(true)} else {setLoginValueError(false)}
+        if (password === '') {setPasswordValueError(true)} else {setPasswordValueError(false)}
+
+        if (username && password) {
+            const api = new ApiService()
+            api.login(username, password).then(checkLoginResponse)
+        }
+    }
+
 
     return (
         <Container component="main" maxWidth="xs">
@@ -143,8 +146,7 @@ const LoginPage = (props) => {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        onClick={() => tryToLogin(changeLoggedInStatus, setLoginError,
-                                                  setLoginValueError, setPasswordValueError)}
+                        onClick={() => tryToLogin()}
                     >
                         Войти
                     </Button>

@@ -1,5 +1,5 @@
 export default class ApiService {
-    _apiBaseUrl = 'http://127.0.0.1:8000/api/'
+    _apiBaseUrl = 'http://192.168.1.165:8000/api/'
 
     async getResponse(method, params) {
         const fullUrl = new URL(`${this._apiBaseUrl}${method}`)
@@ -90,7 +90,11 @@ export default class ApiService {
         const response = await fetch(`${this._apiBaseUrl}user.auth`, {
             method: 'POST',
             mode: 'cors',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Request-Method': 'POST',
+                'Access-Control-Request-Headers': 'X-PINGOTHER, Content-Type'
+            },
             body: JSON.stringify({username: username, password: password})
         })
         if (response.ok) {
@@ -102,7 +106,11 @@ export default class ApiService {
         const response = await fetch(`${this._apiBaseUrl}user.create`, {
             method: 'POST',
             mode: 'cors',
-            headers: {'Content-Type': 'application/json'},
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Request-Method': 'POST',
+                'Access-Control-Request-Headers': 'X-PINGOTHER, Content-Type'
+            },
             body: JSON.stringify({username: username, password: password, name: name, email: email})
         })
         if (response.ok) {
